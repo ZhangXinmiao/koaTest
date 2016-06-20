@@ -4,21 +4,15 @@ require('node-jsx').install({
 });
 
 import koa from 'koa';
-// var koa =  require('koa');
-var path = require('path');
-var logger = require('koa-logger');
-var serve = require('koa-static');
-var route = require('koa-route');
-var render = require('koa-ejs');
-var React = require('react');
-var ReactDOMServer = require('react-dom/server');
+import path from 'path';
+import logger from 'koa-logger';
+import serve from 'koa-static';
+import route from 'koa-route';
+import render from 'koa-ejs';
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 
-var React = require('react');
 var someComponent = React.createFactory(require('./components/SomeComponents.jsx'));
-
-var aaa = require('./components/SomeComponents.jsx');
-
-
 
 var app = koa();
 app.use(logger());
@@ -28,11 +22,7 @@ render(app, {
   layout: false,
   viewExt: 'ejs'
 });
-var element = React.createElement('div', null, 'Hello World!');
-var reactHtml = ReactDOMServer.renderToString(aaa);
-
-var React = require('react');
-var ReactDOMServer = require('react-dom/server');
+var reactHtml = ReactDOMServer.renderToString(someComponent({}));
 
 
 app.use(route.get('/index', function *(next) {
@@ -53,7 +43,4 @@ app.use(route.get('/first', function *(next) {
 
 
 app.listen(3000);
-console.log(someComponent);
-console.log(element);
-console.log(aaa);
 console.log('listening on port 3000');

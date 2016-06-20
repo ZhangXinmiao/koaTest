@@ -1,12 +1,13 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var SomeComponents = React.createElement({
+var SomeComponents = React.createClass({
   render: function(){
       return (
-        <p>233333333</p>
+        <p>😂😂😂</p>
       );
   }
+
 });
 
 module.exports = SomeComponents;
