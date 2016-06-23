@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
+import routerConfig from './router-config';
 
 export default function(Router) {
   const router = new Router();
@@ -9,33 +10,13 @@ export default function(Router) {
    * @param  {Function} Router
    * @return {Function}
    */
-
-  router.get('/first', function* () {
-    yield this.render('moduleA/views/index', {
-      reactOutput: "🐒",
-    });
-  });
-  router.get('/second', function* () {
-    yield this.render('moduleA/views/index', {
-      reactOutput: "🌝",
-    });
-  });
-  router.get('/third', function* () {
-    yield this.render('moduleA/views/index', {
-      reactOutput: "🔥",
-    });
-  });
-  router.get('/forth', function* () {
-    yield this.render('moduleA/views/index', {
-      reactOutput: "🌚",
-    });
-  });
-  router.get('/fifth', function* () {
-    yield this.render('moduleA/views/index', {
-      reactOutput: "🍓",
-    });
-  });
-
+   routerConfig.map(function(item, i){
+      router.get(item.routerUrl, function* () {
+        yield this.render(item.renderUrl, {
+          reactOutput: item.reactOutput,
+        });
+      });
+   });
 
   return router.routes();
 }
